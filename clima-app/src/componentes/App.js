@@ -8,13 +8,48 @@ import './../css/App.css';
 class App extends Component {
 
   state = {
-    error: ''
+    error: '',
+    consulta: {},
+    resultado: {}
+  }
+
+  componentDidUpdate() {
+    this.consultarApi();
   }
 
   componentDidMount() {
     this.setState({
       error: false
     })
+  }
+
+  consultarApi = () => {
+    const { ciudad, pais } = this.state.consulta;
+    // console.log(ciudad);
+    // console.log(pais;
+    if(!ciudad || !pais) return null;
+
+    // ***** Leer la url y agregar el api key
+    const appId = '1e6c661872ef0f8b23ef9b0c7fb48912';
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
+    // console.log(url);
+
+    // ***** Query con fetch API
+    fetch(url)
+      .then(respuesta => {
+        // console.log(respuesta);
+        return respuesta.json();
+      })
+      .then(datos => {
+        // console.log(datos);
+        this.setState({
+          resultado: datos,
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    
   }
 
   datosConsulta = respuesta => {
@@ -25,7 +60,10 @@ class App extends Component {
         error: true,
       })
     } else {
-      console.log('Todo correcto');
+      // console.log('Todo correcto');
+      this.setState({
+        consulta: respuesta,
+      })
     }
   }
 
