@@ -15,13 +15,15 @@ class Formulario extends Component {
             ciudad: this.ciudadRef.current.value,
             pais: this.paisRef.current.value,
         }
-        console.log(respuesta);
+        // console.log(respuesta);
+
         // ***** Enviar por props
+        this.props.datosConsulta(respuesta);
+
         // ***** Opcional resetear el form
     }
 
     /* ***** Validar Formulario ***** */
-
     render() {
         return(
             <div className="contenedor-form">
