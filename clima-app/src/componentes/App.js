@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Formulario from './Formulario';
 import Error from './Error';
+import Clima from './Clima';
 import Imagen from './Imagen';
 import './../css/App.css';
 
@@ -13,8 +14,17 @@ class App extends Component {
     resultado: {}
   }
 
-  componentDidUpdate() {
-    this.consultarApi();
+  componentDidUpdate(prevProps, prevState) {
+    /*
+    console.log('Props');
+    console.log(prevProps);
+    console.log('state');
+    console.log(prevState);
+    */
+   if(prevState.consulta !== this.state.consulta) {
+     this.consultarApi();
+   }
+    
   }
 
   componentDidMount() {
@@ -47,7 +57,7 @@ class App extends Component {
         })
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
       })
     
   }
@@ -63,6 +73,7 @@ class App extends Component {
       // console.log('Todo correcto');
       this.setState({
         consulta: respuesta,
+        error: false,
       })
     }
   }
@@ -70,7 +81,7 @@ class App extends Component {
   render() {
 
     const error = this.state.error;
-    console.log(error);
+    // console.log(error);
     let resultado;
 
     if(error) {
@@ -78,6 +89,11 @@ class App extends Component {
       resultado = <Error 
                           mensaje="Ambos campos son obligatorios"
                   ></Error>
+    } else {
+      /* ***** Componente: Clima ***** */
+      resultado = <Clima
+                          resultado = {this.state.resultado}
+                  ></Clima>
     }
 
     return(
