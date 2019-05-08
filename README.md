@@ -3,7 +3,8 @@ ReactJS: Aplicación de Clima con REST API
 
 ## Dependencias
 
-### ''
+### 'prop-types'
+'> npm install --save-dev prop-types'
 
 ## API: OpenWeatherMap
 
