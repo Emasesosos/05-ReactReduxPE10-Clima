@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Clima extends Component {
 
@@ -21,8 +22,8 @@ class Clima extends Component {
                                 Actual: { (main.temp - kelvin).toFixed(2) } &deg;C
                                 <img src={urlIcono} alt={alt}/>
                             </p>
-                            <p>Max. {main.temp_max - kelvin} &deg;C</p>
-                            <p>Min. {main.temp_min - kelvin} &deg;C</p>
+                            <p>Max. { (main.temp_max - kelvin).toFixed(2) } &deg;C</p>
+                            <p>Min. { (main.temp_min - kelvin).toFixed(2) } &deg;C</p>
                         </span>
                     </div>
                 </div>
@@ -38,6 +39,10 @@ class Clima extends Component {
             </div>
         )
     }
+}
+
+Clima.propTypes = {
+    resultado: PropTypes.object.isRequired,
 }
 
 export default Clima;

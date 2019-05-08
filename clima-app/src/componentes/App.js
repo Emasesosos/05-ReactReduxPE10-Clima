@@ -57,7 +57,7 @@ class App extends Component {
         })
       })
       .catch(error => {
-        // console.log(error);
+        console.log(error);
       })
     
   }
@@ -80,14 +80,20 @@ class App extends Component {
 
   render() {
 
-    const error = this.state.error;
+    const {error} = this.state;
     // console.log(error);
+    const { cod } = this.state.resultado;
+
     let resultado;
 
     if(error) {
        /* ***** Componente: Error ***** */
       resultado = <Error 
                           mensaje="Ambos campos son obligatorios"
+                  ></Error>
+    } else if (cod === "404") {
+      resultado = <Error
+                          mensaje="Ciudad no encontrada"
                   ></Error>
     } else {
       /* ***** Componente: Clima ***** */
